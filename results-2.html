@@ -1,0 +1,2598 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=0.7">
+  <title>Результаты поиска авиабилетов — Яндекс Путешествия</title>
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="components.css">
+  <style>
+    @font-face {
+      font-family: 'YS Text';
+      src: url('YSText-Regular.ttf') format('truetype');
+      font-weight: 400; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: 'YS Text';
+      src: url('YSText-Medium.ttf') format('truetype');
+      font-weight: 500; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: 'YS Text';
+      src: url('YSText-Bold.ttf') format('truetype');
+      font-weight: 700; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: 'YS Display';
+      src: url('YSDisplay-Regular.ttf') format('truetype');
+      font-weight: 400; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: 'YS Display';
+      src: url('YSDisplay-Medium.ttf') format('truetype');
+      font-weight: 500; font-style: normal; font-display: swap;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-family-text);
+      background-color: var(--bg-fill-primary-color);
+      color: var(--text-primary-color);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .page {
+      width: 1440px;
+      margin: 0 auto;
+      background-color: var(--bg-fill-primary-color);
+    }
+
+    /* ===== HEADER BAR ===== */
+    .header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-5) 80px;
+      height: 70px;
+      background-color: var(--bg-fill-primary-color);
+    }
+
+    .header-bar__content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 1280px;
+    }
+
+    .header-bar__logo {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .header-bar__logo .logo-icons {
+      display: flex;
+      align-items: center;
+    }
+
+    .header-bar__logo .logo-yandex {
+      width: 28px;
+      height: 30px;
+      position: relative;
+    }
+
+    .header-bar__logo .logo-yandex img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 28px;
+      height: 30px;
+    }
+
+    .header-bar__logo .logo-sign {
+      width: 29px;
+      height: 30px;
+      position: relative;
+    }
+
+    .header-bar__logo .logo-sign img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 29px;
+      height: 30px;
+    }
+
+    .header-bar__logo .logo-text {
+      height: 30px;
+      display: flex;
+      align-items: center;
+    }
+
+    .header-bar__logo .logo-text img {
+      width: 159px;
+      height: 30px;
+    }
+
+    .header-bar__nav {
+      display: flex;
+      align-items: center;
+      gap: var(--space-8);
+      padding-top: 13px;
+    }
+
+    .header-bar__nav-link {
+      font-family: var(--font-family-text);
+      font-size: var(--font-title-t3-size);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--font-title-t3-lineHeight);
+      color: var(--text-secondary-color);
+      text-decoration: none;
+      white-space: nowrap;
+      transition: color 0.2s ease;
+    }
+
+    .header-bar__nav-link:hover {
+      color: var(--text-primary-color);
+    }
+
+    .header-bar__actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-8);
+      flex-shrink: 0;
+    }
+
+    .header-bar__icons {
+      display: flex;
+      align-items: center;
+      gap: var(--space-10);
+    }
+
+    .header-bar__icon {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+      cursor: pointer;
+      opacity: 0.9;
+      transition: opacity 0.2s ease;
+    }
+
+    .header-bar__icon:hover {
+      opacity: 1;
+    }
+
+    .header-bar__plus-badge {
+      display: flex;
+      align-items: center;
+      padding: 2px 3px;
+      height: 20px;
+      border-radius: 48px;
+      background: linear-gradient(90deg, #ff5c4d 0%, #eb469f 35%, #8341ef 70%, #3f68f9 100%);
+      flex-shrink: 0;
+    }
+
+    .header-bar__plus-badge-content {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .header-bar__plus-badge-glyph {
+      width: 16px;
+      height: 16px;
+    }
+
+    .header-bar__plus-badge-text {
+      font-family: var(--font-family-text);
+      font-size: 13px;
+      font-weight: var(--font-weight-medium);
+      line-height: 16px;
+      color: var(--constant-white);
+    }
+
+    .header-bar__user {
+      display: flex;
+      align-items: center;
+      background-color: #f1f0ed;
+      border-radius: var(--border-radius-large-m);
+      padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .header-bar__user-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding: 0 var(--space-4) 0 var(--space-6);
+    }
+
+    .header-bar__user-level {
+      font-family: var(--font-family-text);
+      font-size: var(--font-caption-c1-fat-size);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--font-caption-c1-fat-lineHeight);
+      color: var(--text-primary-color);
+    }
+
+    .header-bar__user-cashback {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    .header-bar__user-cashback-icon {
+      width: 12px;
+      height: 12px;
+    }
+
+    .header-bar__user-cashback-text {
+      font-family: var(--font-family-text);
+      font-size: var(--font-caption-c2-size);
+      font-weight: var(--font-weight-regular);
+      line-height: var(--font-caption-c2-lineHeight);
+      color: #9d9b98;
+    }
+
+    .header-bar__user-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--border-radius-full);
+      object-fit: cover;
+    }
+
+    /* ===== RESULTS NAVIGATION ===== */
+    .results-nav {
+      padding: 0 120px;
+      margin-top: 32px;
+    }
+
+    .results-nav__inner {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
+    }
+
+    /* ===== COMPACT SEARCH FORM ===== */
+    .avia-form {
+      display: flex;
+      align-items: flex-end;
+      background-color: #ffe356;
+      border-radius: var(--border-radius-small-m);
+      overflow: visible;
+      width: 100%;
+      position: relative;
+    }
+
+    .avia-form__fields {
+      display: flex;
+      align-items: stretch;
+      flex: 1;
+      border: 2px solid #ffe356;
+      border-radius: var(--border-radius-small-m);
+      overflow: visible;
+    }
+
+    .avia-form__field {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background-color: var(--bg-fill-primary-color);
+      padding: var(--space-2) var(--space-8);
+      height: 64px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .avia-form__field--from { width: 228px; }
+    .avia-form__field--to { width: 228px; border-left: 1px solid #f1f0ed; }
+    .avia-form__field--date { flex: 1; border-left: 1px solid #f1f0ed; }
+    .avia-form__field--return { flex: 1; border-left: 1px solid #f1f0ed; }
+    .avia-form__field--passengers { width: 200px; border-left: 1px solid #f1f0ed; }
+
+    .avia-form__field-filled {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .avia-form__field-texts {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      flex: 1;
+      min-width: 0;
+    }
+
+    .avia-form__field-label {
+      font-size: var(--font-caption-c1-size);
+      line-height: var(--font-caption-c1-lineHeight);
+      color: #9d9b98;
+    }
+
+    .avia-form__field-value {
+      font-size: var(--font-body-b2-size);
+      line-height: var(--font-body-b2-lineHeight);
+      color: var(--text-primary-color);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .avia-form__field-sub {
+      font-size: var(--font-caption-c1-size);
+      line-height: var(--font-caption-c1-lineHeight);
+      color: #9d9b98;
+    }
+
+    .avia-form__field-clear {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+
+    .avia-form__field-clear:hover { opacity: 0.7; }
+
+    .avia-form__field-content {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      flex: 1;
+      min-width: 0;
+    }
+
+    .avia-form__field-chevron {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    .avia-form__swap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 60px;
+      background-color: var(--bg-fill-primary-color);
+      padding: 0 var(--space-8);
+      cursor: pointer;
+      flex-shrink: 0;
+      border-left: 1px solid #f1f0ed;
+    }
+
+    .avia-form__swap-icon { width: 16px; height: 16px; }
+
+    .avia-form__submit {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 124px;
+      background-color: #ffe356;
+      cursor: pointer;
+      flex-shrink: 0;
+      padding: 21px 26px 21px 30px;
+      border: none;
+      transition: opacity 0.2s, transform 0.1s;
+      font-family: var(--font-family-text);
+    }
+
+    .avia-form__submit:hover { opacity: 0.85; }
+    .avia-form__submit:active { transform: scale(0.98); }
+
+    .avia-form__submit-text {
+      font-size: var(--font-body-b2-size);
+      line-height: var(--font-body-b2-lineHeight);
+      color: var(--text-primary-color);
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    /* ===== FILTERS BAR ===== */
+    .filters-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-4);
+    }
+
+    .filter-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-4);
+      height: 36px;
+      padding: 0 var(--space-6);
+      background-color: #f1f0ed;
+      border-radius: var(--border-radius-small-m);
+      border: none;
+      cursor: pointer;
+      font-family: var(--font-family-text);
+      font-size: var(--font-caption-c1-size);
+      line-height: var(--font-caption-c1-lineHeight);
+      color: var(--text-primary-color);
+      white-space: nowrap;
+      transition: background-color 0.15s;
+    }
+
+    .filter-btn:hover {
+      background-color: #e3e1dc;
+    }
+
+    .filter-btn--icon-only {
+      width: 40px;
+      padding: 0;
+    }
+
+    .filter-btn__icon {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    .filter-btn__price {
+      color: #9d9b98;
+    }
+
+    .filter-select {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      height: 36px;
+      padding: 0 var(--space-6);
+      background-color: #f1f0ed;
+      border-radius: var(--border-radius-small-m);
+      border: none;
+      cursor: pointer;
+      font-family: var(--font-family-text);
+      font-size: var(--font-caption-c1-size);
+      line-height: var(--font-caption-c1-lineHeight);
+      color: var(--text-primary-color);
+      white-space: nowrap;
+      transition: background-color 0.15s;
+    }
+
+    .filter-select:hover {
+      background-color: #e3e1dc;
+    }
+
+    .filter-select__icon {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    /* ===== RESULTS BODY ===== */
+    .results-body {
+      padding: 0 120px;
+      margin-top: var(--space-10);
+    }
+
+    .results-body__inner {
+      display: flex;
+      gap: 40px;
+    }
+
+    .results-main {
+      width: 860px;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-5);
+      flex-shrink: 0;
+    }
+
+    .results-sidebar {
+      width: 300px;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
+      flex-shrink: 0;
+    }
+
+    /* ===== INFORMER ===== */
+    .informer {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      padding: var(--space-10);
+      background-color: var(--bg-fill-secondary-color);
+      border-radius: var(--border-radius-large-s);
+    }
+
+    .informer__icon {
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+      border-radius: var(--border-radius-full);
+      overflow: hidden;
+    }
+
+    .informer__icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .informer__content {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+      flex: 1;
+      padding-left: var(--space-2);
+    }
+
+    .informer__title {
+      font-family: var(--font-family-text);
+      font-size: var(--font-caption-c1-fat-size);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--font-caption-c1-fat-lineHeight);
+      color: var(--text-primary-color);
+    }
+
+    .informer__subtitle {
+      font-family: var(--font-family-text);
+      font-size: var(--font-caption-c1-size);
+      font-weight: var(--font-weight-regular);
+      line-height: var(--font-caption-c1-lineHeight);
+      color: var(--text-primary-color);
+    }
+
+    .informer__more {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 14px;
+      background-color: var(--bg-fill-primary-color);
+      border-radius: var(--border-radius-small-xs);
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .informer__more img {
+      width: 12px;
+      height: 12px;
+    }
+
+    /* ===== FLIGHT CARD ===== */
+    .flight-card {
+      background-color: var(--bg-fill-primary-color);
+      border-radius: var(--border-radius-medium-s);
+      box-shadow: 0px 0px 2px rgba(157, 157, 149, 0.3), 0px 4px 12px -4px rgba(157, 157, 149, 0.35);
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .flight-card__tags {
+      display: flex;
+      gap: var(--space-2);
+    }
+
+    .flight-card__tag {
+      font-family: var(--font-family-text);
+      font-size: var(--font-caption-c3-fat-size);
+      font-weight: var(--font-weight-medium);
+      line-height: 14px;
+      color: var(--constant-white);
+      padding: 2px var(--space-4);
+      white-space: nowrap;
+    }
+
+    .flight-card__tag--corner {
+      border-radius: var(--border-radius-medium-s) 0 var(--border-radius-small-m) 0;
+      padding-left: var(--space-6);
+    }
+
+    .flight-card__tag--top {
+      border-radius: 0 0 var(--border-radius-small-m) var(--border-radius-small-m);
+    }
+
+    .flight-card__tag--green {
+      background-color: #00bf27;
+    }
+
+    .flight-card__tag--orange {
+      background-color: #ff8c00;
+    }
+
+    .flight-card__body {
+      padding: var(--space-3) var(--space-16) var(--space-14);
+    }
+
+    .flight-card__content {
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .flight-card__left {
+      display: flex;
+      gap: var(--space-8);
+      align-items: center;
+      padding-right: var(--space-10);
+      border-right: 1px solid #f1f0ed;
+      flex-shrink: 0;
+    }
+
+    .flight-card__companies {
+      display: flex;
+      flex-direction: column;
+      gap: 66px;
+      padding-top: 3px;
+      padding-bottom: 23px;
+      width: 92px;
+    }
+
+    .flight-card__company {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      align-items: flex-start;
+    }
+
+    .flight-card__company-logo {
+      width: 24px;
+      height: 24px;
+      border-radius: var(--border-radius-small-xs);
+      overflow: hidden;
+    }
+
+    .flight-card__company-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .flight-card__company-name {
+      font-family: var(--font-family-text);
+      font-size: var(--font-body-b3-size);
+      font-weight: var(--font-weight-regular);
+      line-height: var(--font-body-b3-lineHeight);
+      color: var(--text-primary-color);
+    }
+
+    .flight-card__segments {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .flight-card__segment {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+
+    .flight-card__time-line {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      width: 400px;
+    }
+
+    .flight-card__time {
+      font-family: var(--font-family-display);
+      font-size: var(--font-headline-h3-size);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--font-headline-h3-lineHeight);
+      letter-spacing: -0.24px;
+      color: var(--text-primary-color);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .flight-card__time-divider {
+      flex: 1;
+      height: 1px;
+      background-color: #f1f0ed;
+    }
+
+    .flight-card__duration {
+      font-family: var(--font-family-text);
+      font-size: var(--font-body-b3-size);
+      font-weight: var(--font-weight-regular);
+      line-height: var(--font-body-b3-lineHeight);
+      color: #9d9b98;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .flight-card__airports {
+      display: flex;
+      gap: 44px;
+      justify-content: center;
+    }
+
+    .flight-card__airport {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      width: 106px;
+    }
+
+    .flight-card__airport-name {
+      font-family: var(--font-family-text);
+      font-size: var(--font-body-b3-size);
+      font-weight: var(--font-weight-regular);
+      line-height: var(--font-body-b3-lineHeight);
+      color: var(--text-primary-color);
+    }
+
+    .flight-card__airport-code {
+      font-family: var(--font-family-text);
+      font-size: var(--font-body-b3-size);
+      font-weight: var(--font-weight-regular);
+      line-height: var(--font-body-b3-lineHeight);
+      color: var(--text-primary-color);
+    }
+
+    .flight-card__airport--arrival {
+      width: 109px;
+    }
+
+    .flight-card__connection {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      align-items: center;
+      width: 120px;
+    }
+
+    .flight-card__connection-row {
+      display: flex;
+      gap: var(--space-2);
+      align-items: flex-start;
+    }
+
+    .flight-card__connection-code {
+      font-family: var(--font-family-text);
+      font-size: var(--font-body-b3-size);
+      font-weight: var(--font-weight-regular);
+      line-height: var(--font-body-b3-lineHeight);
+      color: var(--text-primary-color);
+    }
+
+    .flight-card__connection-time {
+      font-family: var(--font-family-text);
+      font-size: var(--font-body-b3-size);
+      font-weight: var(--font-weight-regular);
+      line-height: var(--font-body-b3-lineHeight);
+      color: #ff6d3a;
+    }
+
+    .flight-card__connection-direct {
+      font-family: var(--font-family-text);
+      font-size: var(--font-body-b3-size);
+      font-weight: var(--font-weight-regular);
+      line-height: var(--font-body-b3-lineHeight);
+      color: var(--text-primary-color);
+    }
+
+    .flight-card__right {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-8);
+      padding-left: var(--space-10);
+    }
+
+    .flight-card__luggage-info {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+
+    .flight-card__luggage-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 225px;
+    }
+
+    .flight-card__luggage-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+    }
+
+    .flight-card__luggage-icon {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+
+    .flight-card__luggage-text {
+      font-family: var(--font-family-text);
+      font-size: var(--font-body-b3-size);
+      font-weight: var(--font-weight-regular);
+      line-height: var(--font-body-b3-lineHeight);
+      color: #009900;
+      white-space: nowrap;
+    }
+
+    .flight-card__luggage-text--neutral {
+      color: var(--text-primary-color);
+    }
+
+    .flight-card__share-icon {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.15s;
+    }
+
+    .flight-card__share-icon:hover { opacity: 1; }
+
+    .flight-card__price-section {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      align-items: center;
+    }
+
+    .flight-card__price-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 225px;
+      height: 52px;
+      padding: 0 var(--space-10);
+      background-color: #ffe356;
+      border-radius: var(--border-radius-small-m);
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.1s;
+    }
+
+    .flight-card__price-btn:hover { opacity: 0.85; }
+    .flight-card__price-btn:active { transform: scale(0.98); }
+
+    .flight-card__price-value {
+      font-family: var(--font-family-display);
+      font-size: var(--font-headline-h3-size);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--font-headline-h3-lineHeight);
+      letter-spacing: -0.24px;
+      color: var(--text-primary-color);
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .flight-card__tariff-link {
+      font-family: var(--font-family-text);
+      font-size: var(--font-caption-c1-size);
+      font-weight: var(--font-weight-regular);
+      line-height: var(--font-caption-c1-lineHeight);
+      color: var(--text-primary-color);
+      text-align: center;
+    }
+
+    /* ===== NEIGHBORING DATES CARD ===== */
+    .neighbor-card {
+      background-color: var(--bg-fill-primary-color);
+      border-radius: var(--border-radius-medium-s);
+      box-shadow: 0px 0px 2px rgba(157, 157, 149, 0.3), 0px 4px 12px -4px rgba(157, 157, 149, 0.35);
+      padding: var(--space-8) var(--space-16) var(--space-8);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .neighbor-card__header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+    }
+
+    .neighbor-card__icon {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .neighbor-card__icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .neighbor-card__title-block {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .neighbor-card__title {
+      font-family: var(--font-family-text);
+      font-size: var(--font-title-t2-size);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--font-title-t2-lineHeight);
+      color: var(--text-primary-color);
+    }
+
+    .neighbor-card__subtitle {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    .neighbor-card__subtitle-text {
+      font-family: var(--font-family-text);
+      font-size: var(--font-body-b3-size);
+      font-weight: var(--font-weight-regular);
+      line-height: var(--font-body-b3-lineHeight);
+      color: var(--text-primary-color);
+    }
+
+    .neighbor-card__subtitle-dot {
+      font-size: var(--font-caption-c1-size);
+      line-height: var(--font-caption-c1-lineHeight);
+      color: var(--text-primary-color);
+    }
+
+    .neighbor-card__prices {
+      display: flex;
+      gap: var(--space-2);
+      align-items: flex-end;
+      margin-top: var(--space-6);
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .neighbor-card__prices::-webkit-scrollbar { display: none; }
+
+    .neighbor-card__price-item {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      padding: var(--space-8);
+      border: 1px solid #e3e1dc;
+      border-radius: var(--border-radius-small-m);
+      flex-shrink: 0;
+      cursor: pointer;
+      transition: background-color 0.15s;
+    }
+
+    .neighbor-card__price-item:hover {
+      background-color: var(--bg-fill-secondary-color);
+    }
+
+    .neighbor-card__price-amount {
+      font-family: var(--font-family-display);
+      font-size: var(--font-headline-h3-size);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--font-headline-h3-lineHeight);
+      letter-spacing: -0.24px;
+      color: var(--text-primary-color);
+      white-space: nowrap;
+    }
+
+    .neighbor-card__price-amount--good {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    .neighbor-card__price-amount--good .neighbor-card__price-text {
+      color: #009900;
+    }
+
+    .neighbor-card__price-fire {
+      width: 24px;
+      height: 24px;
+    }
+
+    .neighbor-card__price-dates {
+      font-family: var(--font-family-text);
+      font-size: var(--font-body-b3-size);
+      font-weight: var(--font-weight-regular);
+      line-height: var(--font-body-b3-lineHeight);
+      color: var(--text-primary-color);
+    }
+
+    .neighbor-card__scroll-btn {
+      position: absolute;
+      right: var(--space-8);
+      top: 50%;
+      transform: translateY(-50%);
+      width: 36px;
+      height: 36px;
+      border-radius: var(--border-radius-large-m);
+      background-color: var(--bg-fill-primary-color);
+      box-shadow: 0px 0px 2px rgba(157, 157, 149, 0.3), 0px 4px 12px rgba(157, 157, 149, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .neighbor-card__scroll-btn img {
+      width: 16px;
+      height: 16px;
+    }
+
+    .neighbor-card__actions {
+      display: flex;
+      gap: var(--space-8);
+      margin-top: var(--space-10);
+    }
+
+    .neighbor-card__action {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .neighbor-card__action-icon {
+      width: 16px;
+      height: 20px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .neighbor-card__action-icon img {
+      width: 16px;
+      height: 16px;
+    }
+
+    .neighbor-card__action-text {
+      font-family: var(--font-family-text);
+      font-size: var(--font-body-b3-size);
+      font-weight: var(--font-weight-regular);
+      line-height: var(--font-body-b3-lineHeight);
+      color: #004ed8;
+    }
+
+    /* ===== SIDEBAR WIDGETS ===== */
+    .sidebar-widget {
+      background-color: var(--bg-fill-primary-color);
+      border-radius: var(--border-radius-medium-s);
+      box-shadow: 0px 0px 2px rgba(157, 157, 149, 0.3), 0px 4px 12px rgba(157, 157, 149, 0.35);
+    }
+
+    /* Toggle Widget */
+    .toggle-widget {
+      padding: var(--space-12) var(--space-12) var(--space-10);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
+    }
+
+    .toggle-widget__header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+    }
+
+    .toggle-widget__switch {
+      position: relative;
+      width: 34px;
+      height: 20px;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .toggle-widget__switch .toggle__input {
+      position: absolute;
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      cursor: pointer;
+    }
+
+    .toggle-widget__switch .toggle__track {
+      position: absolute;
+      inset: 0;
+      background: var(--bg-line, #ededee);
+      border-radius: var(--border-radius-full);
+      transition: background 0.2s ease;
+    }
+
+    .toggle-widget__switch .toggle__knob {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      top: 2px;
+      left: 2px;
+      background: var(--constant-white);
+      border-radius: 50%;
+      box-shadow: var(--shadow-toggle-knob);
+      transition: left 0.2s ease;
+    }
+
+    .toggle-widget__switch .toggle__input:checked ~ .toggle__track {
+      background: var(--constant-black);
+    }
+
+    .toggle-widget__switch .toggle__input:checked ~ .toggle__knob {
+      left: 16px;
+    }
+
+    .toggle-widget__label {
+      font-family: var(--font-family-text);
+      font-size: var(--font-body-b3-size);
+      font-weight: var(--font-weight-regular);
+      line-height: var(--font-body-b3-lineHeight);
+      color: var(--text-primary-color);
+    }
+
+    .toggle-widget__description {
+      font-family: var(--font-family-text);
+      font-size: var(--font-caption-c1-size);
+      font-weight: var(--font-weight-regular);
+      line-height: var(--font-caption-c1-lineHeight);
+      color: var(--text-secondary-color);
+    }
+
+    /* Weather Widget */
+    .weather-widget {
+      padding: var(--space-8) var(--space-12);
+    }
+
+    .weather-widget__title {
+      font-family: var(--font-family-text);
+      font-size: var(--font-title-t2-size);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--font-title-t2-lineHeight);
+      color: var(--text-primary-color);
+    }
+
+    .weather-widget__list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .weather-widget__row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-8);
+      padding: var(--space-6) 0;
+      border-bottom: 1px solid #f1f0ed;
+    }
+
+    .weather-widget__row:last-child {
+      border-bottom: none;
+    }
+
+    .weather-widget__icon {
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+    }
+
+    .weather-widget__icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .weather-widget__info {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .weather-widget__date {
+      font-family: var(--font-family-text);
+      font-size: var(--font-body-b3-size);
+      font-weight: var(--font-weight-regular);
+      line-height: var(--font-body-b3-lineHeight);
+      color: var(--text-primary-color);
+    }
+
+    .weather-widget__temp {
+      font-family: var(--font-family-text);
+      font-size: var(--font-body-b3-size);
+      font-weight: var(--font-weight-regular);
+      line-height: var(--font-body-b3-lineHeight);
+      color: var(--text-primary-color);
+    }
+
+    /* Map Widget */
+    .map-widget {
+      padding: var(--space-8) var(--space-12);
+    }
+
+    .map-widget__title {
+      font-family: var(--font-family-text);
+      font-size: var(--font-title-t2-size);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--font-title-t2-lineHeight);
+      color: var(--text-primary-color);
+    }
+
+    .map-widget__label {
+      display: flex;
+      align-items: center;
+      gap: var(--space-6);
+      margin-top: var(--space-6);
+    }
+
+    .map-widget__label-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--border-radius-large-m);
+      background-color: #267eff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .map-widget__label-icon img {
+      width: 16px;
+      height: 16px;
+      filter: brightness(0) invert(1);
+    }
+
+    .map-widget__label-text {
+      font-family: var(--font-family-text);
+      font-size: var(--font-body-b3-size);
+      font-weight: var(--font-weight-regular);
+      line-height: var(--font-body-b3-lineHeight);
+      color: var(--text-primary-color);
+    }
+
+    .map-widget__map {
+      width: 252px;
+      height: 152px;
+      border-radius: var(--border-radius-small-m);
+      overflow: hidden;
+      margin-top: var(--space-6);
+      position: relative;
+    }
+
+    .map-widget__map img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .map-widget__pin {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .map-widget__pin-label {
+      background-color: var(--bg-fill-primary-color);
+      border: 1px solid #f1f0ed;
+      border-radius: var(--border-radius-large-m);
+      padding: 7px var(--space-4);
+      font-family: var(--font-family-text);
+      font-size: var(--font-caption-c1-size);
+      font-weight: var(--font-weight-regular);
+      line-height: var(--font-caption-c1-lineHeight);
+      color: var(--text-primary-color);
+      white-space: nowrap;
+      box-shadow: 0px 0px 2px rgba(157, 157, 149, 0.3), 0px 4px 12px rgba(157, 157, 149, 0.35);
+    }
+
+    .map-widget__pin-arrow {
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 5px solid var(--bg-fill-primary-color);
+    }
+
+    .map-widget__link {
+      font-family: var(--font-family-text);
+      font-size: var(--font-body-b3-size);
+      font-weight: var(--font-weight-regular);
+      line-height: var(--font-body-b3-lineHeight);
+      color: #004ed8;
+      text-decoration: none;
+      margin-top: var(--space-6);
+      display: block;
+    }
+
+    .map-widget__link:hover {
+      text-decoration: underline;
+    }
+
+    /* ===== CITY DROPDOWN ===== */
+    .city-dropdown { position: absolute; top: 100%; left: 0; width: 450px; background: #fff; border-radius: 4px; box-shadow: 0 0 2px rgba(157,157,149,0.3), 0 4px 12px -4px rgba(157,157,149,0.35); z-index: 100; display: none; overflow: hidden; margin-top: 2px; }
+    .city-dropdown.is-open { display: block; }
+    .city-dropdown__toggle-row { display: flex; align-items: center; gap: 16px; padding: 9px 12px 9px 20px; border-bottom: 1px solid rgba(51,51,51,0.1); cursor: pointer; }
+    .city-dropdown__toggle-icon { width: 16px; height: 16px; flex-shrink: 0; }
+    .city-dropdown__toggle-text { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+    .city-dropdown__toggle-title { font-size: 16px; line-height: 20px; color: var(--text-primary-color); }
+    .city-dropdown__toggle-sub { font-size: 14px; line-height: 18px; color: #9d9b98; }
+    .city-dropdown__toggle-switch { width: 42px; height: 28px; border-radius: 14px; background: #ededee; position: relative; cursor: pointer; flex-shrink: 0; transition: background 0.2s; }
+    .city-dropdown__toggle-switch.is-on { background: #ffe356; }
+    .city-dropdown__toggle-knob { width: 24px; height: 24px; border-radius: 50%; background: #fff; position: absolute; top: 2px; left: 2px; transition: left 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.15), 0 0 1px rgba(0,0,0,0.1); }
+    .city-dropdown__toggle-switch.is-on .city-dropdown__toggle-knob { left: 16px; }
+    .city-dropdown__section { padding: 8px 20px; background: #f5f4f2; border-top: 1px solid #e3e1dc; border-bottom: 1px solid #e3e1dc; font-size: 14px; line-height: 18px; color: var(--text-primary-color); }
+    .city-dropdown__section--highlight { background: #fff8db; }
+    .city-dropdown__item { display: flex; align-items: center; gap: 16px; padding: 9px 20px; border-bottom: 1px solid rgba(51,51,51,0.1); cursor: pointer; transition: background 0.1s; }
+    .city-dropdown__item:hover { background: #f5f5f5; }
+    .city-dropdown__item-icon { width: 16px; height: 16px; flex-shrink: 0; opacity: 0.5; }
+    .city-dropdown__item-text { flex: 1; display: flex; flex-direction: column; }
+    .city-dropdown__item-name { font-size: 16px; line-height: 20px; color: #333; }
+    .city-dropdown__item-detail { font-size: 14px; line-height: 18px; color: #9d9b98; }
+    .city-dropdown__item--simple { display: flex; flex-direction: column; padding: 18px 20px; border-bottom: 1px solid rgba(51,51,51,0.1); cursor: pointer; transition: background 0.1s; }
+    .city-dropdown__item--simple:hover { background: #f5f5f5; }
+
+    /* ===== CALENDAR DROPDOWN ===== */
+    .calendar-dropdown { position: absolute; top: 100%; left: 456px; width: 540px; height: 458px; background: #fff; border-radius: 4px; box-shadow: 0 0 2px rgba(157,157,149,0.3), 0 4px 12px -4px rgba(157,157,149,0.35); z-index: 100; display: none; overflow: hidden; margin-top: 2px; }
+    .calendar-dropdown.is-open { display: flex; }
+    .calendar__months { width: 128px; display: flex; flex-direction: column; padding-top: 8px; overflow-y: auto; flex-shrink: 0; }
+    .calendar__month-btn { padding: 8px 16px; font-size: 14px; line-height: 18px; color: var(--text-primary-color); cursor: pointer; border: none; background: none; text-align: left; font-family: inherit; transition: background 0.1s; white-space: nowrap; }
+    .calendar__month-btn:hover { background: #f5f5f5; }
+    .calendar__month-btn.is-active { font-weight: 500; }
+    .calendar__grid { flex: 1; overflow-y: auto; padding: 0 16px; }
+    .calendar__weekdays { display: grid; grid-template-columns: repeat(7, 1fr); padding: 16px 0 8px; position: sticky; top: 0; background: #fff; z-index: 1; }
+    .calendar__weekday { font-size: 14px; line-height: 18px; color: var(--text-primary-color); text-align: center; font-weight: 500; }
+    .calendar__weekday--weekend { color: #e50f4f; }
+    .calendar__month-title { font-size: 14px; line-height: 18px; color: var(--text-primary-color); padding: 12px 0 8px; }
+    .calendar__days { display: grid; grid-template-columns: repeat(7, 1fr); }
+    .calendar__day { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 6px 0; height: 46px; cursor: pointer; border-radius: 4px; transition: background 0.1s; font-size: 14px; line-height: 18px; }
+    .calendar__day:hover { background: #f5f5f5; }
+    .calendar__day--empty { cursor: default; }
+    .calendar__day--empty:hover { background: transparent; }
+    .calendar__day--selected { background: #ffe356; }
+    .calendar__day--selected:hover { background: #ffe356; }
+    .calendar__day--range { background: #fff8db; }
+    .calendar__day-num { font-size: 14px; line-height: 18px; }
+    .calendar__day-price { font-size: 10px; line-height: 12px; color: #9d9b98; white-space: nowrap; }
+
+    /* ===== PASSENGERS DROPDOWN ===== */
+    .passengers-dropdown { position: absolute; top: 100%; right: 124px; width: 320px; background: #fff; border-radius: 4px; box-shadow: 0 0 2px rgba(157,157,149,0.3), 0 4px 12px -4px rgba(157,157,149,0.35); z-index: 100; display: none; padding: 20px; margin-top: 2px; }
+    .passengers-dropdown.is-open { display: flex; flex-direction: column; gap: 20px; }
+    .pax-row { display: flex; align-items: center; justify-content: space-between; }
+    .pax-label { display: flex; flex-direction: column; gap: 6px; }
+    .pax-label__title { font-size: 16px; line-height: 20px; color: #0d0d0d; }
+    .pax-label__sub { font-size: 14px; line-height: 18px; color: #9d9b98; }
+    .pax-spinner { display: flex; align-items: center; gap: 0; width: 138px; height: 44px; position: relative; justify-content: space-between; }
+    .pax-spinner__btn { width: 44px; height: 44px; border-radius: 50px; background: #f1f0ed; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 18px; line-height: 1; color: #0d0d0d; transition: background 0.15s; flex-shrink: 0; }
+    .pax-spinner__btn:hover { background: #e3e1dc; }
+    .pax-spinner__btn:disabled { cursor: default; background: #f1f0ed; }
+    .pax-spinner__btn:disabled .pax-spinner__minus-line { background: #9d9b98; }
+    .pax-spinner__val { font-size: 18px; font-weight: 700; line-height: 22px; color: #0d0d0d; text-align: center; width: 26px; flex-shrink: 0; }
+    .pax-spinner__minus-line { width: 8px; height: 2px; background: #0d0d0d; border-radius: 2px; }
+    .pax-spinner__plus { position: relative; width: 16px; height: 16px; }
+    .pax-spinner__plus::before, .pax-spinner__plus::after { content: ''; position: absolute; background: #0d0d0d; border-radius: 2px; }
+    .pax-spinner__plus::before { width: 2px; height: 10px; top: 3px; left: 7px; }
+    .pax-spinner__plus::after { width: 10px; height: 2px; top: 7px; left: 3px; }
+    .pax-radio { display: flex; height: 44px; background: #f1f0ed; border-radius: 8px; padding: 1px; }
+    .pax-radio__btn { flex: 1; height: 42px; border: none; background: transparent; border-radius: 7px; font-family: inherit; font-size: 16px; line-height: 20px; color: #0d0d0d; cursor: pointer; transition: background 0.15s, box-shadow 0.15s; }
+    .pax-radio__btn.is-active { background: #fff; box-shadow: 0 0 2px rgba(157,157,149,0.3), 0 4px 12px rgba(157,157,149,0.35); }
+
+    .avia-form__field-row { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+    .avia-form__field-placeholder { font-size: 18px; line-height: 22px; color: #9d9b98; }
+    .avia-form__field-icon { width: 18px; height: 18px; flex-shrink: 0; cursor: pointer; }
+    .avia-form__city-input { border: none; outline: none; background: transparent; font-family: inherit; font-size: 18px; line-height: 22px; color: var(--text-primary-color); width: 100%; padding: 0; }
+    .avia-form__city-input::placeholder { color: #9d9b98; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1440px) {
+      .page { width: 100%; }
+    }
+  </style>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=107721517', 'ym');
+
+    ym(107721517, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/107721517" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</head>
+<body>
+  <div class="page">
+
+    <!-- HEADER BAR -->
+    <div class="header-bar">
+      <div class="header-bar__content">
+        <a href="form-2.html" class="header-bar__logo">
+          <div class="logo-icons">
+            <div class="logo-yandex">
+              <img src="logo-yandex.svg" width="28" height="30" alt="Яндекс">
+            </div>
+            <div class="logo-sign">
+              <img src="logo-sign.svg" width="29" height="30" alt="">
+            </div>
+          </div>
+          <div class="logo-text">
+            <img src="logo-text.svg" width="159" height="30" alt="Путешествия">
+          </div>
+        </a>
+
+        <nav class="header-bar__nav">
+          <a href="#" class="header-bar__nav-link">Отели</a>
+          <a href="form-2.html" class="header-bar__nav-link">Авиабилеты</a>
+          <a href="#" class="header-bar__nav-link">Ж/д билеты</a>
+          <a href="#" class="header-bar__nav-link">Автобусы</a>
+          <a href="#" class="header-bar__nav-link">Туры</a>
+        </nav>
+
+        <div class="header-bar__actions">
+          <div class="header-bar__icons">
+            <img src="Discount.svg" alt="" class="header-bar__icon">
+            <img src="MessageOutline.svg" alt="" class="header-bar__icon">
+            <img src="HeartOutline.svg" alt="" class="header-bar__icon">
+            <img src="Orders.svg" alt="" class="header-bar__icon">
+            <img src="Book.svg" alt="" class="header-bar__icon">
+            <img src="BriefCaseB2BFilled.svg" alt="" class="header-bar__icon">
+          </div>
+
+          <div class="header-bar__plus-badge">
+            <div class="header-bar__plus-badge-content">
+              <img src="plus-badge-glyph.svg" alt="" class="header-bar__plus-badge-glyph">
+              <span class="header-bar__plus-badge-text">988</span>
+            </div>
+          </div>
+
+          <div class="header-bar__user">
+            <div class="header-bar__user-info">
+              <span class="header-bar__user-level">1-й уровень</span>
+              <div class="header-bar__user-cashback">
+                <img src="cashback-icon.svg" alt="" class="header-bar__user-cashback-icon">
+                <span class="header-bar__user-cashback-text">5% кешбэк</span>
+              </div>
+            </div>
+            <img src="user-avatar.png" alt="" class="header-bar__user-avatar">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULTS NAVIGATION: SEARCH FORM + FILTERS -->
+    <div class="results-nav">
+      <div class="results-nav__inner">
+
+        <!-- Compact Search Form -->
+        <div class="avia-form" id="aviaForm">
+          <div class="avia-form__fields">
+            <!-- Откуда -->
+            <div class="avia-form__field avia-form__field--from" id="fieldFrom" data-field="from">
+              <div class="avia-form__field-filled" id="fromFilled">
+                <div class="avia-form__field-texts">
+                  <span class="avia-form__field-value" id="fromValue">Москва</span>
+                  <span class="avia-form__field-sub" id="fromCode">MOW</span>
+                </div>
+                <img src="clear-field.svg" alt="" class="avia-form__field-clear" data-clear="from">
+              </div>
+              <div id="fromEmpty" style="display:none">
+                <input type="text" class="avia-form__city-input" id="fromInput" placeholder="Откуда" autocomplete="off">
+              </div>
+            </div>
+
+            <!-- Swap -->
+            <div class="avia-form__swap" id="swapBtn">
+              <img src="icon-swap.svg" alt="" class="avia-form__swap-icon">
+            </div>
+
+            <!-- Куда -->
+            <div class="avia-form__field avia-form__field--to" id="fieldTo" data-field="to">
+              <div class="avia-form__field-filled" id="toFilled">
+                <div class="avia-form__field-texts">
+                  <span class="avia-form__field-value" id="toValue">Сочи</span>
+                  <span class="avia-form__field-sub" id="toCode">AER</span>
+                </div>
+                <img src="clear-field.svg" alt="" class="avia-form__field-clear" data-clear="to">
+              </div>
+              <div id="toEmpty" style="display:none">
+                <input type="text" class="avia-form__city-input" id="toInput" placeholder="Куда" autocomplete="off">
+              </div>
+            </div>
+
+            <!-- Туда -->
+            <div class="avia-form__field avia-form__field--date" id="fieldDate" data-field="date">
+              <div class="avia-form__field-filled" id="dateFilled">
+                <div class="avia-form__field-texts">
+                  <span class="avia-form__field-label">Туда</span>
+                  <span class="avia-form__field-value" id="dateValue">15 августа</span>
+                </div>
+                <img src="clear-field.svg" alt="" class="avia-form__field-clear" data-clear="date">
+              </div>
+              <div class="avia-form__field-row" id="dateEmpty" style="display:none">
+                <span class="avia-form__field-placeholder">Туда</span>
+                <img src="icon-calendar.svg" alt="" class="avia-form__field-icon">
+              </div>
+            </div>
+
+            <!-- Обратно -->
+            <div class="avia-form__field avia-form__field--return" id="fieldReturn" data-field="return">
+              <div class="avia-form__field-filled" id="returnFilled">
+                <div class="avia-form__field-texts">
+                  <span class="avia-form__field-label">Обратно</span>
+                  <span class="avia-form__field-value" id="returnValue">18 августа</span>
+                </div>
+                <img src="clear-field.svg" alt="" class="avia-form__field-clear" data-clear="return">
+              </div>
+              <div class="avia-form__field-row" id="returnEmpty" style="display:none">
+                <span class="avia-form__field-placeholder">Обратно</span>
+                <img src="icon-calendar.svg" alt="" class="avia-form__field-icon">
+              </div>
+            </div>
+
+            <!-- Пассажиры -->
+            <div class="avia-form__field avia-form__field--passengers">
+              <div class="avia-form__field-row">
+                <div class="avia-form__field-content">
+                  <span class="avia-form__field-value">2 пассажира</span>
+                  <span class="avia-form__field-sub">Эконом</span>
+                </div>
+                <img src="icon-chevron-down.svg" alt="" class="avia-form__field-chevron">
+              </div>
+            </div>
+          </div>
+
+          <!-- Найти -->
+          <button class="avia-form__submit">
+            <span class="avia-form__submit-text">Найти</span>
+          </button>
+
+          <!-- City Dropdown -->
+          <div class="city-dropdown" id="cityDropdown">
+            <div class="city-dropdown__section city-dropdown__section--highlight">Вы искали</div>
+            <div class="city-dropdown__item" data-city="Казань" data-code="KZN" data-history="1" data-date="15 августа" data-return="18 августа" data-pax="2">
+              <img src="Watch.svg" alt="" class="city-dropdown__item-icon">
+              <div class="city-dropdown__item-text">
+                <span class="city-dropdown__item-name">Казань</span>
+                <span class="city-dropdown__item-detail">15 - 18 авг  •  2 гостя</span>
+              </div>
+            </div>
+            <div class="city-dropdown__item" data-city="Санкт-Петербург" data-code="LED" data-history="1" data-date="5 августа" data-return="8 августа" data-pax="2">
+              <img src="Watch.svg" alt="" class="city-dropdown__item-icon">
+              <div class="city-dropdown__item-text">
+                <span class="city-dropdown__item-name">Санкт-Петербург</span>
+                <span class="city-dropdown__item-detail">5 - 8 авг  •  2 гостя</span>
+              </div>
+            </div>
+            <div class="city-dropdown__section">Регион</div>
+            <div class="city-dropdown__item--simple" data-city="Москва" data-code="MOW">
+              <span class="city-dropdown__item-name">Москва</span>
+            </div>
+            <div class="city-dropdown__item--simple" data-city="Сочи" data-code="AER">
+              <span class="city-dropdown__item-name">Сочи</span>
+              <span class="city-dropdown__item-detail">Краснодарский край</span>
+            </div>
+            <div class="city-dropdown__item--simple" data-city="Ростов-на-Дону" data-code="ROV">
+              <span class="city-dropdown__item-name">Ростов-на-Дону</span>
+              <span class="city-dropdown__item-detail">Ростовская область</span>
+            </div>
+          </div>
+
+          <!-- Calendar Dropdown -->
+          <div class="calendar-dropdown" id="calendarDropdown">
+            <div class="calendar__months" id="calMonths"></div>
+            <div class="calendar__grid" id="calGrid"></div>
+          </div>
+
+          <!-- Passengers Dropdown -->
+          <div class="passengers-dropdown" id="passengersDropdown">
+            <div class="pax-row">
+              <div class="pax-label">
+                <span class="pax-label__title">Взрослые</span>
+                <span class="pax-label__sub">от 18 лет</span>
+              </div>
+              <div class="pax-spinner" data-pax="adults">
+                <button class="pax-spinner__btn pax-spinner__btn--minus" data-dir="-1"><span class="pax-spinner__minus-line"></span></button>
+                <span class="pax-spinner__val">2</span>
+                <button class="pax-spinner__btn pax-spinner__btn--plus" data-dir="1"><span class="pax-spinner__plus"></span></button>
+              </div>
+            </div>
+            <div class="pax-row">
+              <div class="pax-label">
+                <span class="pax-label__title">Дети</span>
+                <span class="pax-label__sub">от 2 до 12 лет</span>
+              </div>
+              <div class="pax-spinner" data-pax="children">
+                <button class="pax-spinner__btn pax-spinner__btn--minus" data-dir="-1" disabled><span class="pax-spinner__minus-line"></span></button>
+                <span class="pax-spinner__val">0</span>
+                <button class="pax-spinner__btn pax-spinner__btn--plus" data-dir="1"><span class="pax-spinner__plus"></span></button>
+              </div>
+            </div>
+            <div class="pax-row">
+              <div class="pax-label">
+                <span class="pax-label__title">Младенцы</span>
+                <span class="pax-label__sub">до 2 лет (без места)</span>
+              </div>
+              <div class="pax-spinner" data-pax="infants">
+                <button class="pax-spinner__btn pax-spinner__btn--minus" data-dir="-1" disabled><span class="pax-spinner__minus-line"></span></button>
+                <span class="pax-spinner__val">0</span>
+                <button class="pax-spinner__btn pax-spinner__btn--plus" data-dir="1"><span class="pax-spinner__plus"></span></button>
+              </div>
+            </div>
+            <div class="pax-radio">
+              <button class="pax-radio__btn is-active" data-class="economy">Эконом</button>
+              <button class="pax-radio__btn" data-class="business">Бизнес</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filters Bar -->
+        <div class="filters-bar">
+          <button class="filter-btn filter-btn--icon-only">
+            <img src="SortAscending.svg" alt="" class="filter-btn__icon">
+          </button>
+          <button class="filter-btn">
+            Без пересадок <span class="filter-btn__price">&nbsp;&nbsp;от 11 884 ₽</span>
+          </button>
+          <button class="filter-btn">
+            С багажом <span class="filter-btn__price">&nbsp;&nbsp;от 7 484 ₽</span>
+          </button>
+          <button class="filter-select">
+            Пересадки
+            <img src="ArrowBottom.svg" alt="" class="filter-select__icon">
+          </button>
+          <button class="filter-select">
+            Время
+            <img src="ArrowBottom.svg" alt="" class="filter-select__icon">
+          </button>
+          <button class="filter-select">
+            Аэропорты
+            <img src="ArrowBottom.svg" alt="" class="filter-select__icon">
+          </button>
+          <button class="filter-select">
+            Авиакомпании
+            <img src="ArrowBottom.svg" alt="" class="filter-select__icon">
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RESULTS BODY -->
+    <div class="results-body">
+      <div class="results-body__inner">
+
+        <!-- LEFT: FLIGHT CARDS -->
+        <div class="results-main">
+
+          <!-- Informer -->
+          <div class="informer">
+            <div class="informer__icon">
+              <img src="clock-emoji.png" alt="">
+            </div>
+            <div class="informer__content">
+              <span class="informer__title">Оплачивайте билеты с бизнес-счёта для рабочих поездок</span>
+              <span class="informer__subtitle">Что это значит?</span>
+            </div>
+            <div class="informer__more">
+              <img src="KebabHorizontal.svg" alt="">
+            </div>
+          </div>
+
+          <!-- Flight Card 1 -->
+          <div class="flight-card" onclick="window.location.href='done.html'">
+            <div class="flight-card__tags">
+              <span class="flight-card__tag flight-card__tag--corner flight-card__tag--green">Лучшая цена</span>
+              <span class="flight-card__tag flight-card__tag--top flight-card__tag--green">Заказ на Я.Путешествиях</span>
+            </div>
+            <div class="flight-card__body">
+              <div class="flight-card__content">
+                <div class="flight-card__left">
+                  <div class="flight-card__companies">
+                    <div class="flight-card__company">
+                      <div class="flight-card__company-logo">
+                        <img src="airline-rossiya.svg" alt="">
+                      </div>
+                      <span class="flight-card__company-name">Россия</span>
+                    </div>
+                    <div class="flight-card__company">
+                      <div class="flight-card__company-logo">
+                        <img src="airline-rossiya.svg" alt="">
+                      </div>
+                      <span class="flight-card__company-name">Россия</span>
+                    </div>
+                  </div>
+                  <div class="flight-card__segments">
+                    <!-- Segment 1: туда -->
+                    <div class="flight-card__segment">
+                      <div class="flight-card__time-line">
+                        <span class="flight-card__time">07:25</span>
+                        <div class="flight-card__time-divider"></div>
+                        <span class="flight-card__duration">2ч 25 мин</span>
+                        <div class="flight-card__time-divider"></div>
+                        <span class="flight-card__time">09:50</span>
+                      </div>
+                      <div class="flight-card__airports">
+                        <div class="flight-card__airport">
+                          <span class="flight-card__airport-name">Шереметьево</span>
+                          <span class="flight-card__airport-code">SVO</span>
+                        </div>
+                        <div class="flight-card__connection">
+                          <span class="flight-card__connection-direct">прямой</span>
+                        </div>
+                        <div class="flight-card__airport flight-card__airport--arrival">
+                          <span class="flight-card__airport-name">Сочи</span>
+                          <span class="flight-card__airport-code">AER</span>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Segment 2: обратно -->
+                    <div class="flight-card__segment">
+                      <div class="flight-card__time-line">
+                        <span class="flight-card__time">18:30</span>
+                        <div class="flight-card__time-divider"></div>
+                        <span class="flight-card__duration">2ч 30 мин</span>
+                        <div class="flight-card__time-divider"></div>
+                        <span class="flight-card__time">21:00</span>
+                      </div>
+                      <div class="flight-card__airports">
+                        <div class="flight-card__airport">
+                          <span class="flight-card__airport-name">Сочи</span>
+                          <span class="flight-card__airport-code">AER</span>
+                        </div>
+                        <div class="flight-card__connection">
+                          <span class="flight-card__connection-direct">прямой</span>
+                        </div>
+                        <div class="flight-card__airport flight-card__airport--arrival">
+                          <span class="flight-card__airport-name">Шереметьево</span>
+                          <span class="flight-card__airport-code">SVO</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="flight-card__right">
+                  <div class="flight-card__luggage-info">
+                    <div class="flight-card__luggage-row">
+                      <div class="flight-card__luggage-item">
+                        <img src="HandLuggage.svg" alt="" class="flight-card__luggage-icon">
+                        <span class="flight-card__luggage-text">Ручная кладь 1х10 кг</span>
+                      </div>
+                      <img src="Share.svg" alt="" class="flight-card__share-icon">
+                    </div>
+                    <div class="flight-card__luggage-item">
+                      <img src="WithoutLuggage.svg" alt="" class="flight-card__luggage-icon">
+                      <span class="flight-card__luggage-text flight-card__luggage-text--neutral">Без багажа</span>
+                    </div>
+                  </div>
+                  <div class="flight-card__price-section">
+                    <button class="flight-card__price-btn" onclick="window.location.href='done.html'">
+                      <span class="flight-card__price-value">20 000 ₽</span>
+                    </button>
+                    <span class="flight-card__tariff-link">выбрать тариф</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Flight Card 2 -->
+          <div class="flight-card" onclick="window.location.href='done.html'">
+            <div class="flight-card__tags">
+              <span class="flight-card__tag flight-card__tag--corner flight-card__tag--orange">Продает авиакомпания</span>
+              <span class="flight-card__tag flight-card__tag--top flight-card__tag--green">Заказ на Я.Путешествиях</span>
+            </div>
+            <div class="flight-card__body">
+              <div class="flight-card__content">
+                <div class="flight-card__left">
+                  <div class="flight-card__companies">
+                    <div class="flight-card__company">
+                      <div class="flight-card__company-logo">
+                        <img src="airline-rossiya.svg" alt="">
+                      </div>
+                      <span class="flight-card__company-name">Россия</span>
+                    </div>
+                    <div class="flight-card__company">
+                      <div class="flight-card__company-logo">
+                        <img src="airline-rossiya.svg" alt="">
+                      </div>
+                      <span class="flight-card__company-name">Россия</span>
+                    </div>
+                  </div>
+                  <div class="flight-card__segments">
+                    <div class="flight-card__segment">
+                      <div class="flight-card__time-line">
+                        <span class="flight-card__time">10:45</span>
+                        <div class="flight-card__time-divider"></div>
+                        <span class="flight-card__duration">2ч 30 мин</span>
+                        <div class="flight-card__time-divider"></div>
+                        <span class="flight-card__time">13:15</span>
+                      </div>
+                      <div class="flight-card__airports">
+                        <div class="flight-card__airport">
+                          <span class="flight-card__airport-name">Домодедово</span>
+                          <span class="flight-card__airport-code">DME</span>
+                        </div>
+                        <div class="flight-card__connection">
+                          <span class="flight-card__connection-direct">прямой</span>
+                        </div>
+                        <div class="flight-card__airport flight-card__airport--arrival">
+                          <span class="flight-card__airport-name">Сочи</span>
+                          <span class="flight-card__airport-code">AER</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="flight-card__segment">
+                      <div class="flight-card__time-line">
+                        <span class="flight-card__time">18:00</span>
+                        <div class="flight-card__time-divider"></div>
+                        <span class="flight-card__duration">2ч 40 мин</span>
+                        <div class="flight-card__time-divider"></div>
+                        <span class="flight-card__time">20:40</span>
+                      </div>
+                      <div class="flight-card__airports">
+                        <div class="flight-card__airport">
+                          <span class="flight-card__airport-name">Сочи</span>
+                          <span class="flight-card__airport-code">AER</span>
+                        </div>
+                        <div class="flight-card__connection">
+                          <span class="flight-card__connection-direct">прямой</span>
+                        </div>
+                        <div class="flight-card__airport flight-card__airport--arrival">
+                          <span class="flight-card__airport-name">Домодедово</span>
+                          <span class="flight-card__airport-code">DME</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="flight-card__right">
+                  <div class="flight-card__luggage-info">
+                    <div class="flight-card__luggage-row">
+                      <div class="flight-card__luggage-item">
+                        <img src="HandLuggage.svg" alt="" class="flight-card__luggage-icon">
+                        <span class="flight-card__luggage-text">Ручная кладь 1х10 кг</span>
+                      </div>
+                      <img src="Share.svg" alt="" class="flight-card__share-icon">
+                    </div>
+                    <div class="flight-card__luggage-item">
+                      <img src="WithoutLuggage.svg" alt="" class="flight-card__luggage-icon">
+                      <span class="flight-card__luggage-text flight-card__luggage-text--neutral">Без багажа</span>
+                    </div>
+                  </div>
+                  <div class="flight-card__price-section">
+                    <button class="flight-card__price-btn" onclick="window.location.href='done.html'">
+                      <span class="flight-card__price-value">19 500 ₽</span>
+                    </button>
+                    <span class="flight-card__tariff-link">выбрать тариф</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Neighboring Dates Card -->
+          <div class="neighbor-card">
+            <div class="neighbor-card__header">
+              <div class="neighbor-card__icon">
+                <img src="neighboring-dates-icon.svg" alt="">
+              </div>
+              <div class="neighbor-card__title-block">
+                <span class="neighbor-card__title">Цены на соседние даты</span>
+                <div class="neighbor-card__subtitle">
+                  <span class="neighbor-card__subtitle-text">Поездка на 3 дня</span>
+                  <span class="neighbor-card__subtitle-dot">•</span>
+                  <span class="neighbor-card__subtitle-text">вылет 15 августа</span>
+                </div>
+              </div>
+            </div>
+            <div class="neighbor-card__prices">
+              <div class="neighbor-card__price-item">
+                <span class="neighbor-card__price-amount">20 000 ₽</span>
+                <span class="neighbor-card__price-dates">12 пн − 15 чт</span>
+              </div>
+              <div class="neighbor-card__price-item">
+                <span class="neighbor-card__price-amount">20 000 ₽</span>
+                <span class="neighbor-card__price-dates">12 пн − 15 чт</span>
+              </div>
+              <div class="neighbor-card__price-item">
+                <div class="neighbor-card__price-amount--good">
+                  <span class="neighbor-card__price-text" style="font-family: var(--font-family-display); font-size: var(--font-headline-h3-size); font-weight: var(--font-weight-medium); line-height: var(--font-headline-h3-lineHeight); letter-spacing: -0.24px; white-space: nowrap;">20 000 ₽</span>
+                  <img src="fire-icon.svg" alt="" class="neighbor-card__price-fire">
+                </div>
+                <span class="neighbor-card__price-dates">12 пн − 15 чт</span>
+              </div>
+              <div class="neighbor-card__price-item">
+                <div class="neighbor-card__price-amount--good">
+                  <span class="neighbor-card__price-text" style="font-family: var(--font-family-display); font-size: var(--font-headline-h3-size); font-weight: var(--font-weight-medium); line-height: var(--font-headline-h3-lineHeight); letter-spacing: -0.24px; white-space: nowrap;">200 000 ₽</span>
+                  <img src="fire-icon.svg" alt="" class="neighbor-card__price-fire">
+                </div>
+                <span class="neighbor-card__price-dates">12 пн − 15 чт</span>
+              </div>
+              <div class="neighbor-card__price-item">
+                <span class="neighbor-card__price-amount">200 000 ₽</span>
+                <span class="neighbor-card__price-dates">12 пн − 15 чт</span>
+              </div>
+              <div class="neighbor-card__price-item">
+                <span class="neighbor-card__price-amount">200 000 ₽</span>
+                <span class="neighbor-card__price-dates">12 пн − 15 чт</span>
+              </div>
+            </div>
+            <button class="neighbor-card__scroll-btn">
+              <img src="ArrowRight.svg" alt="">
+            </button>
+            <div class="neighbor-card__actions">
+              <a href="#" class="neighbor-card__action">
+                <div class="neighbor-card__action-icon">
+                  <img src="Calendar.svg" alt="">
+                </div>
+                <span class="neighbor-card__action-text">Смотреть весь календарь</span>
+              </a>
+              <a href="#" class="neighbor-card__action">
+                <div class="neighbor-card__action-icon">
+                  <img src="Mail.svg" alt="">
+                </div>
+                <span class="neighbor-card__action-text">Подписаться на изменение цены</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Flight Card 3 -->
+          <div class="flight-card" onclick="window.location.href='done.html'">
+            <div class="flight-card__tags">
+              <span class="flight-card__tag flight-card__tag--corner flight-card__tag--green">Заказ на Я.Путешествиях</span>
+            </div>
+            <div class="flight-card__body">
+              <div class="flight-card__content">
+                <div class="flight-card__left">
+                  <div class="flight-card__companies">
+                    <div class="flight-card__company">
+                      <div class="flight-card__company-logo">
+                        <img src="airline-rossiya.svg" alt="">
+                      </div>
+                      <span class="flight-card__company-name">Россия</span>
+                    </div>
+                    <div class="flight-card__company">
+                      <div class="flight-card__company-logo">
+                        <img src="airline-rossiya.svg" alt="">
+                      </div>
+                      <span class="flight-card__company-name">Россия</span>
+                    </div>
+                  </div>
+                  <div class="flight-card__segments">
+                    <div class="flight-card__segment">
+                      <div class="flight-card__time-line">
+                        <span class="flight-card__time">14:20</span>
+                        <div class="flight-card__time-divider"></div>
+                        <span class="flight-card__duration">2ч 35 мин</span>
+                        <div class="flight-card__time-divider"></div>
+                        <span class="flight-card__time">16:55</span>
+                      </div>
+                      <div class="flight-card__airports">
+                        <div class="flight-card__airport">
+                          <span class="flight-card__airport-name">Внуково</span>
+                          <span class="flight-card__airport-code">VKO</span>
+                        </div>
+                        <div class="flight-card__connection">
+                          <span class="flight-card__connection-direct">прямой</span>
+                        </div>
+                        <div class="flight-card__airport flight-card__airport--arrival">
+                          <span class="flight-card__airport-name">Сочи</span>
+                          <span class="flight-card__airport-code">AER</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="flight-card__segment">
+                      <div class="flight-card__time-line">
+                        <span class="flight-card__time">22:10</span>
+                        <div class="flight-card__time-divider"></div>
+                        <span class="flight-card__duration">2ч 45 мин</span>
+                        <div class="flight-card__time-divider"></div>
+                        <span class="flight-card__time">00:55</span>
+                      </div>
+                      <div class="flight-card__airports">
+                        <div class="flight-card__airport">
+                          <span class="flight-card__airport-name">Сочи</span>
+                          <span class="flight-card__airport-code">AER</span>
+                        </div>
+                        <div class="flight-card__connection">
+                          <span class="flight-card__connection-direct">прямой</span>
+                        </div>
+                        <div class="flight-card__airport flight-card__airport--arrival">
+                          <span class="flight-card__airport-name">Внуково</span>
+                          <span class="flight-card__airport-code">VKO</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="flight-card__right">
+                  <div class="flight-card__luggage-info">
+                    <div class="flight-card__luggage-row">
+                      <div class="flight-card__luggage-item">
+                        <img src="HandLuggage.svg" alt="" class="flight-card__luggage-icon">
+                        <span class="flight-card__luggage-text">Ручная кладь 1х10 кг</span>
+                      </div>
+                      <img src="Share.svg" alt="" class="flight-card__share-icon">
+                    </div>
+                    <div class="flight-card__luggage-item">
+                      <img src="WithoutLuggage.svg" alt="" class="flight-card__luggage-icon">
+                      <span class="flight-card__luggage-text flight-card__luggage-text--neutral">Без багажа</span>
+                    </div>
+                  </div>
+                  <div class="flight-card__price-section">
+                    <button class="flight-card__price-btn" onclick="window.location.href='done.html'">
+                      <span class="flight-card__price-value">20 000 ₽</span>
+                    </button>
+                    <span class="flight-card__tariff-link">выбрать тариф</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Flight Card 4 -->
+          <div class="flight-card" onclick="window.location.href='done.html'">
+            <div class="flight-card__tags">
+              <span class="flight-card__tag flight-card__tag--corner flight-card__tag--orange">Продает авиакомпания</span>
+              <span class="flight-card__tag flight-card__tag--top flight-card__tag--green">Заказ на Я.Путешествиях</span>
+            </div>
+            <div class="flight-card__body">
+              <div class="flight-card__content">
+                <div class="flight-card__left">
+                  <div class="flight-card__companies">
+                    <div class="flight-card__company">
+                      <div class="flight-card__company-logo">
+                        <img src="airline-rossiya.svg" alt="">
+                      </div>
+                      <span class="flight-card__company-name">Россия</span>
+                    </div>
+                    <div class="flight-card__company">
+                      <div class="flight-card__company-logo">
+                        <img src="airline-rossiya.svg" alt="">
+                      </div>
+                      <span class="flight-card__company-name">Россия</span>
+                    </div>
+                  </div>
+                  <div class="flight-card__segments">
+                    <div class="flight-card__segment">
+                      <div class="flight-card__time-line">
+                        <span class="flight-card__time">06:30</span>
+                        <div class="flight-card__time-divider"></div>
+                        <span class="flight-card__duration">2ч 20 мин</span>
+                        <div class="flight-card__time-divider"></div>
+                        <span class="flight-card__time">08:50</span>
+                      </div>
+                      <div class="flight-card__airports">
+                        <div class="flight-card__airport">
+                          <span class="flight-card__airport-name">Шереметьево</span>
+                          <span class="flight-card__airport-code">SVO</span>
+                        </div>
+                        <div class="flight-card__connection">
+                          <span class="flight-card__connection-direct">прямой</span>
+                        </div>
+                        <div class="flight-card__airport flight-card__airport--arrival">
+                          <span class="flight-card__airport-name">Сочи</span>
+                          <span class="flight-card__airport-code">AER</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="flight-card__segment">
+                      <div class="flight-card__time-line">
+                        <span class="flight-card__time">15:40</span>
+                        <div class="flight-card__time-divider"></div>
+                        <span class="flight-card__duration">2ч 30 мин</span>
+                        <div class="flight-card__time-divider"></div>
+                        <span class="flight-card__time">18:10</span>
+                      </div>
+                      <div class="flight-card__airports">
+                        <div class="flight-card__airport">
+                          <span class="flight-card__airport-name">Сочи</span>
+                          <span class="flight-card__airport-code">AER</span>
+                        </div>
+                        <div class="flight-card__connection">
+                          <span class="flight-card__connection-direct">прямой</span>
+                        </div>
+                        <div class="flight-card__airport flight-card__airport--arrival">
+                          <span class="flight-card__airport-name">Шереметьево</span>
+                          <span class="flight-card__airport-code">SVO</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="flight-card__right">
+                  <div class="flight-card__luggage-info">
+                    <div class="flight-card__luggage-row">
+                      <div class="flight-card__luggage-item">
+                        <img src="HandLuggage.svg" alt="" class="flight-card__luggage-icon">
+                        <span class="flight-card__luggage-text">Ручная кладь 1х10 кг</span>
+                      </div>
+                      <img src="Share.svg" alt="" class="flight-card__share-icon">
+                    </div>
+                    <div class="flight-card__luggage-item">
+                      <img src="WithoutLuggage.svg" alt="" class="flight-card__luggage-icon">
+                      <span class="flight-card__luggage-text flight-card__luggage-text--neutral">Без багажа</span>
+                    </div>
+                  </div>
+                  <div class="flight-card__price-section">
+                    <button class="flight-card__price-btn" onclick="window.location.href='done.html'">
+                      <span class="flight-card__price-value">20 000 ₽</span>
+                    </button>
+                    <span class="flight-card__tariff-link">выбрать тариф</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- RIGHT: SIDEBAR -->
+        <div class="results-sidebar">
+
+          <!-- Toggle Widget -->
+          <div class="sidebar-widget toggle-widget">
+            <div class="toggle-widget__header">
+              <label class="toggle-widget__switch">
+                <input type="checkbox" class="toggle__input" id="sidebarToggle" checked>
+                <div class="toggle__track"></div>
+                <div class="toggle__knob"></div>
+              </label>
+              <span class="toggle-widget__label">Еду по работе</span>
+            </div>
+            <span class="toggle-widget__description">Оплачивайте билеты с бизнес-счёта для рабочих поездок</span>
+          </div>
+
+          <!-- Weather Widget -->
+          <div class="sidebar-widget weather-widget">
+            <span class="weather-widget__title">Погода в Сочи</span>
+            <div class="weather-widget__list">
+              <div class="weather-widget__row">
+                <div class="weather-widget__icon">
+                  <img src="weather-cloud.svg" alt="">
+                </div>
+                <div class="weather-widget__info">
+                  <span class="weather-widget__date">пн, 1 июля</span>
+                  <span class="weather-widget__temp">+25...+13°</span>
+                </div>
+              </div>
+              <div class="weather-widget__row">
+                <div class="weather-widget__icon">
+                  <img src="weather-cloud.svg" alt="">
+                </div>
+                <div class="weather-widget__info">
+                  <span class="weather-widget__date">пн, 1 июля</span>
+                  <span class="weather-widget__temp">+25...+13°</span>
+                </div>
+              </div>
+              <div class="weather-widget__row">
+                <div class="weather-widget__icon">
+                  <img src="weather-cloud.svg" alt="">
+                </div>
+                <div class="weather-widget__info">
+                  <span class="weather-widget__date">пн, 1 июля</span>
+                  <span class="weather-widget__temp">+25...+13°</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Map Widget -->
+          <div class="sidebar-widget map-widget">
+            <span class="map-widget__title">Отели в Сочи</span>
+            <div class="map-widget__label">
+              <div class="map-widget__label-icon">
+                <img src="Hotel.svg" alt="">
+              </div>
+              <span class="map-widget__label-text">7 вариантов проживания от 600 ₽ с 15 по 18 августа</span>
+            </div>
+            <div class="map-widget__map">
+              <img src="map-screenshot.png" alt="">
+              <div class="map-widget__pin" style="left: 48px; top: 21px;">
+                <span class="map-widget__pin-label">1 300 ₽</span>
+                <div class="map-widget__pin-arrow"></div>
+              </div>
+              <div class="map-widget__pin" style="left: 94px; top: 34px;">
+                <span class="map-widget__pin-label">11 300 ₽</span>
+                <div class="map-widget__pin-arrow"></div>
+              </div>
+              <div class="map-widget__pin" style="left: 62px; top: 82px;">
+                <span class="map-widget__pin-label">800 ₽</span>
+                <div class="map-widget__pin-arrow"></div>
+              </div>
+              <div class="map-widget__pin" style="left: 162px; top: 50px;">
+                <span class="map-widget__pin-label">1 000 ₽</span>
+                <div class="map-widget__pin-arrow"></div>
+              </div>
+            </div>
+            <a href="#" class="map-widget__link">Выбрать подходящий отель</a>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+<script>
+(function() {
+  var state = { activeField: null, calendarMode: null };
+
+  var MONTHS_RU = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+  var MONTHS_RU_GEN = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+  var WEEKDAYS = ['пн','вт','ср','чт','пт','сб','вс'];
+
+  var cityDD = document.getElementById('cityDropdown');
+  var calDD = document.getElementById('calendarDropdown');
+  var paxDD = document.getElementById('passengersDropdown');
+
+  var currentFromCode = 'MOW';
+  var currentToCode = 'AER';
+
+  function updateWorkLabel() {
+    var on = document.getElementById('b2bToggle').classList.contains('is-on');
+    document.getElementById('fromCode').textContent = currentFromCode + (on && currentFromCode ? '  • По работе' : '');
+    document.getElementById('toCode').textContent = currentToCode + (on && currentToCode ? '  • По работе' : '');
+  }
+
+  function closeAll() {
+    cityDD.classList.remove('is-open');
+    calDD.classList.remove('is-open');
+    paxDD.classList.remove('is-open');
+    state.activeField = null;
+    state.calendarMode = null;
+  }
+
+  function fillCity(field, city, code) {
+    if (field === 'from') currentFromCode = code || '';
+    if (field === 'to') currentToCode = code || '';
+    document.getElementById(field + 'Value').textContent = city;
+    document.getElementById(field + 'Code').textContent = code || '';
+    document.getElementById(field + 'Filled').style.display = '';
+    document.getElementById(field + 'Empty').style.display = 'none';
+    updateWorkLabel();
+  }
+
+  function clearCity(field) {
+    if (field === 'from') currentFromCode = '';
+    if (field === 'to') currentToCode = '';
+    document.getElementById(field + 'Filled').style.display = 'none';
+    document.getElementById(field + 'Empty').style.display = '';
+    document.getElementById(field + 'Input').value = '';
+    updateWorkLabel();
+  }
+
+  function fillDate(field, day, monthIdx, rawText) {
+    document.getElementById(field + 'Value').textContent = rawText || (day + ' ' + MONTHS_RU_GEN[monthIdx]);
+    document.getElementById(field + 'Filled').style.display = '';
+    document.getElementById(field + 'Empty').style.display = 'none';
+  }
+
+  function clearDate(field) {
+    document.getElementById(field + 'Filled').style.display = 'none';
+    document.getElementById(field + 'Empty').style.display = '';
+    if (field === 'date') selectedStart = null;
+    if (field === 'return') selectedEnd = null;
+  }
+
+  function openCityDropdown(field) {
+    closeAll();
+    state.activeField = field;
+    var fieldEl = document.getElementById('field' + field.charAt(0).toUpperCase() + field.slice(1));
+    var formRect = document.getElementById('aviaForm').getBoundingClientRect();
+    var fieldRect = fieldEl.getBoundingClientRect();
+    cityDD.style.left = (fieldRect.left - formRect.left) + 'px';
+    cityDD.classList.add('is-open');
+    var inp = document.getElementById(field + 'Input');
+    if (inp && inp.offsetParent) inp.focus();
+  }
+
+  function openCalendar(mode) {
+    closeAll();
+    state.calendarMode = mode;
+    var formRect = document.getElementById('aviaForm').getBoundingClientRect();
+    var dateEl = document.getElementById('fieldDate');
+    var dateRect = dateEl.getBoundingClientRect();
+    calDD.style.left = (dateRect.left - formRect.left) + 'px';
+    calDD.classList.add('is-open');
+    buildCalendar();
+  }
+
+  ['from', 'to'].forEach(function(f) {
+    var el = document.getElementById('field' + f.charAt(0).toUpperCase() + f.slice(1));
+    el.addEventListener('click', function(e) {
+      if (e.target.dataset.clear) return;
+      openCityDropdown(f);
+    });
+  });
+
+  ['date', 'return'].forEach(function(f) {
+    var id = f === 'date' ? 'fieldDate' : 'fieldReturn';
+    document.getElementById(id).addEventListener('click', function(e) {
+      if (e.target.dataset.clear) return;
+      openCalendar(f);
+    });
+  });
+
+  document.querySelectorAll('[data-clear]').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var f = this.dataset.clear;
+      if (f === 'from' || f === 'to') clearCity(f);
+      else clearDate(f);
+    });
+  });
+
+  cityDD.addEventListener('click', function(e) {
+    e.stopPropagation();
+    var item = e.target.closest('[data-city]');
+    if (!item) return;
+    var field = state.activeField;
+    if (!field) return;
+    fillCity(field, item.dataset.city, item.dataset.code);
+
+    if (item.dataset.history) {
+      if (item.dataset.date) fillDate('date', 0, 0, item.dataset.date);
+      if (item.dataset.return) fillDate('return', 0, 0, item.dataset.return);
+      updateFlightCards(item.dataset.code);
+      closeAll();
+    } else if (field === 'to') {
+      openCalendar('date');
+    } else {
+      closeAll();
+    }
+  });
+
+  document.getElementById('swapBtn').addEventListener('click', function() {
+    var fv = document.getElementById('fromValue').textContent;
+    var fc = currentFromCode;
+    var tv = document.getElementById('toValue').textContent;
+    var tc = currentToCode;
+    var fFilled = document.getElementById('fromFilled').style.display !== 'none';
+    var tFilled = document.getElementById('toFilled').style.display !== 'none';
+    if (fFilled && tFilled) {
+      fillCity('from', tv, tc);
+      fillCity('to', fv, fc);
+    }
+  });
+
+  document.querySelector('.avia-form__field--passengers').addEventListener('click', function(e) {
+    if (paxDD.classList.contains('is-open')) { closeAll(); return; }
+    closeAll();
+    paxDD.classList.add('is-open');
+  });
+
+  var paxCounts = { adults: 2, children: 0, infants: 0 };
+  var paxClass = 'economy';
+
+  function updatePaxDisplay() {
+    var total = paxCounts.adults + paxCounts.children;
+    var label = '';
+    if (total === 1) label = '1 пассажир';
+    else if (total >= 2 && total <= 4) label = total + ' пассажира';
+    else label = total + ' пассажиров';
+    if (paxCounts.infants > 0) label += ' + ' + paxCounts.infants + ' мл.';
+    document.querySelector('.avia-form__field--passengers .avia-form__field-value').textContent = label;
+    document.querySelector('.avia-form__field--passengers .avia-form__field-sub').textContent = paxClass === 'economy' ? 'Эконом' : 'Бизнес';
+  }
+
+  function updateSpinnerStates() {
+    paxDD.querySelectorAll('.pax-spinner').forEach(function(sp) {
+      var key = sp.dataset.pax;
+      var val = paxCounts[key];
+      var min = key === 'adults' ? 1 : 0;
+      sp.querySelector('.pax-spinner__btn--minus').disabled = val <= min;
+      sp.querySelector('.pax-spinner__val').textContent = val;
+    });
+  }
+
+  paxDD.addEventListener('click', function(e) {
+    e.stopPropagation();
+    var btn = e.target.closest('.pax-spinner__btn');
+    if (btn) {
+      var spinner = btn.closest('.pax-spinner');
+      var key = spinner.dataset.pax;
+      var dir = parseInt(btn.dataset.dir);
+      var min = key === 'adults' ? 1 : 0;
+      paxCounts[key] = Math.max(min, Math.min(9, paxCounts[key] + dir));
+      updateSpinnerStates();
+      updatePaxDisplay();
+      return;
+    }
+    var radioBtn = e.target.closest('.pax-radio__btn');
+    if (radioBtn) {
+      paxDD.querySelectorAll('.pax-radio__btn').forEach(function(b) { b.classList.remove('is-active'); });
+      radioBtn.classList.add('is-active');
+      paxClass = radioBtn.dataset.class;
+      updatePaxDisplay();
+    }
+  });
+
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.avia-form') && !e.target.closest('.city-dropdown') && !e.target.closest('.calendar-dropdown') && !e.target.closest('.passengers-dropdown')) {
+      closeAll();
+    }
+  });
+
+  var selectedStart = null;
+  var selectedEnd = null;
+
+  function highlightRange() {
+    var allDays = document.querySelectorAll('#calGrid .calendar__day');
+    allDays.forEach(function(el) {
+      el.classList.remove('calendar__day--selected', 'calendar__day--range');
+      if (el.classList.contains('calendar__day--empty')) return;
+      var ts = new Date(parseInt(el.dataset.year), parseInt(el.dataset.month), parseInt(el.dataset.day)).getTime();
+      if (selectedStart && ts === selectedStart.getTime()) el.classList.add('calendar__day--selected');
+      if (selectedEnd && ts === selectedEnd.getTime()) el.classList.add('calendar__day--selected');
+      if (selectedStart && selectedEnd && ts > selectedStart.getTime() && ts < selectedEnd.getTime()) el.classList.add('calendar__day--range');
+    });
+  }
+
+  function buildCalendar() {
+    var monthsEl = document.getElementById('calMonths');
+    var gridEl = document.getElementById('calGrid');
+    monthsEl.innerHTML = '';
+    gridEl.innerHTML = '';
+
+    var now = new Date();
+    var startMonth = now.getMonth();
+    var startYear = now.getFullYear();
+
+    var wdRow = document.createElement('div');
+    wdRow.className = 'calendar__weekdays';
+    WEEKDAYS.forEach(function(d, i) {
+      var span = document.createElement('span');
+      span.className = 'calendar__weekday' + (i >= 5 ? ' calendar__weekday--weekend' : '');
+      span.textContent = d;
+      wdRow.appendChild(span);
+    });
+    gridEl.appendChild(wdRow);
+
+    for (var m = 0; m < 13; m++) {
+      var mi = (startMonth + m) % 12;
+      var yi = startYear + Math.floor((startMonth + m) / 12);
+
+      var btn = document.createElement('button');
+      btn.className = 'calendar__month-btn';
+      btn.textContent = MONTHS_RU[mi] + (yi !== startYear ? ' ' + yi : '');
+      monthsEl.appendChild(btn);
+
+      var title = document.createElement('div');
+      title.className = 'calendar__month-title';
+      title.textContent = MONTHS_RU[mi];
+      gridEl.appendChild(title);
+
+      var daysContainer = document.createElement('div');
+      daysContainer.className = 'calendar__days';
+
+      var firstDay = new Date(yi, mi, 1).getDay();
+      var offset = firstDay === 0 ? 6 : firstDay - 1;
+      var daysInMonth = new Date(yi, mi + 1, 0).getDate();
+
+      for (var e = 0; e < offset; e++) {
+        var empty = document.createElement('div');
+        empty.className = 'calendar__day calendar__day--empty';
+        daysContainer.appendChild(empty);
+      }
+
+      for (var d = 1; d <= daysInMonth; d++) {
+        var dayEl = document.createElement('div');
+        dayEl.className = 'calendar__day';
+        dayEl.dataset.day = d;
+        dayEl.dataset.month = mi;
+        dayEl.dataset.year = yi;
+
+        var num = document.createElement('span');
+        num.className = 'calendar__day-num';
+        num.textContent = d;
+        dayEl.appendChild(num);
+
+        var isPast = new Date(yi, mi, d) < new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        if (!isPast) {
+          var price = document.createElement('span');
+          price.className = 'calendar__day-price';
+          price.textContent = '20 198 ₽';
+          dayEl.appendChild(price);
+        } else {
+          dayEl.style.opacity = '0.3';
+          dayEl.style.pointerEvents = 'none';
+        }
+
+        daysContainer.appendChild(dayEl);
+      }
+      gridEl.appendChild(daysContainer);
+    }
+
+    highlightRange();
+
+    gridEl.addEventListener('click', function(e) {
+      var dayEl = e.target.closest('.calendar__day');
+      if (!dayEl || dayEl.classList.contains('calendar__day--empty')) return;
+      var d = parseInt(dayEl.dataset.day);
+      var mi = parseInt(dayEl.dataset.month);
+      var yi = parseInt(dayEl.dataset.year);
+      var picked = new Date(yi, mi, d);
+
+      if (state.calendarMode === 'date') {
+        selectedStart = picked;
+        selectedEnd = null;
+        fillDate('date', d, mi);
+        state.calendarMode = 'return';
+        highlightRange();
+      } else {
+        if (selectedStart && picked <= selectedStart) {
+          selectedStart = picked;
+          fillDate('date', d, mi);
+          highlightRange();
+        } else {
+          selectedEnd = picked;
+          fillDate('return', d, mi);
+          highlightRange();
+          closeAll();
+        }
+      }
+    });
+  }
+
+  var CITY_DATA = {
+    'KZN': { name: 'Казань', code: 'KZN', airports: [{ name: 'Казань', code: 'KZN' }] },
+    'LED': { name: 'Санкт-Петербург', code: 'LED', airports: [{ name: 'Пулково', code: 'LED' }] },
+    'AER': { name: 'Сочи', code: 'AER', airports: [{ name: 'Сочи', code: 'AER' }] },
+    'MOW': { name: 'Москва', code: 'MOW', airports: [{ name: 'Шереметьево', code: 'SVO' }, { name: 'Домодедово', code: 'DME' }, { name: 'Внуково', code: 'VKO' }] }
+  };
+
+  function updateFlightCards(toCode) {
+    var dest = CITY_DATA[toCode];
+    if (!dest) return;
+    var cards = document.querySelectorAll('.flight-card');
+    cards.forEach(function(card) {
+      var segments = card.querySelectorAll('.flight-card__segment');
+      if (segments.length >= 1) {
+        var arrAirport = segments[0].querySelector('.flight-card__airport--arrival');
+        if (arrAirport) {
+          var ap = dest.airports[Math.floor(Math.random() * dest.airports.length)];
+          arrAirport.querySelector('.flight-card__airport-name').textContent = ap.name;
+          arrAirport.querySelector('.flight-card__airport-code').textContent = ap.code;
+        }
+      }
+      if (segments.length >= 2) {
+        var depAirport = segments[1].querySelector('.flight-card__airport:not(.flight-card__airport--arrival)');
+        if (depAirport) {
+          var arrName = segments[0].querySelector('.flight-card__airport--arrival .flight-card__airport-name').textContent;
+          var arrCode = segments[0].querySelector('.flight-card__airport--arrival .flight-card__airport-code').textContent;
+          depAirport.querySelector('.flight-card__airport-name').textContent = arrName;
+          depAirport.querySelector('.flight-card__airport-code').textContent = arrCode;
+        }
+      }
+    });
+  }
+
+  var urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.has('from')) {
+    fillCity('from', urlParams.get('from'), urlParams.get('fromCode') || '');
+  }
+  if (urlParams.has('to')) {
+    fillCity('to', urlParams.get('to'), urlParams.get('toCode') || '');
+    updateFlightCards(urlParams.get('toCode'));
+  }
+  if (urlParams.has('date')) {
+    document.getElementById('dateValue').textContent = urlParams.get('date');
+    document.getElementById('dateFilled').style.display = '';
+    document.getElementById('dateEmpty').style.display = 'none';
+  }
+  if (urlParams.has('return')) {
+    document.getElementById('returnValue').textContent = urlParams.get('return');
+    document.getElementById('returnFilled').style.display = '';
+    document.getElementById('returnEmpty').style.display = 'none';
+  }
+  if (urlParams.has('work') && urlParams.get('work') === '1') {
+    document.getElementById('b2bToggle').classList.add('is-on');
+    updateWorkLabel();
+  }
+})();
+</script>
+</body>
+</html>
